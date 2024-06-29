@@ -2,25 +2,42 @@
 #define OS_WINDOW_H
 
 #include <string>
+#include <windows.h>
+#include <gl/gl.h>
 
 class Window {
 public:
-	enum WindowType {
-		Windowed,
-		Borderless,
-		Fullscreen
-	};
+    enum WindowType {
+        Windowed,
+        Borderless,
+        Fullscreen
+    };
 
-	Window(const std::string& title, int width, int height, Window::WindowType type = Windowed);
-	~Window();
+    Window(const std::wstring& title, int width, int height, WindowType type = Windowed);
+    ~Window();
 
-	void Update();
+    void Update();
+	void Destroy();
+    bool IsRunning() const;    
 
 private:
-	int m_Width = 0, m_Height = 0;
-	Window::WindowType m_Type = Windowed;
+    std::wstring m_Title;
+    int m_Width, m_Height;
+    WindowType m_Type;
 
-	void* m_Data = nullptr;
+    HWND m_hWnd;
+    HINSTANCE m_hInstance;
+    HDC m_hDC;
+    HGLRC m_hRC;
+    WNDCLASS m_wc;
+	bool m_Running;
+
+    static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    void RegisterWindowClass();
+    void CreateAppWindow();
+    void CreateOpenGLContext();
+    void DestroyOpenGLContext();
+    void SwapBuffers();
 };
 
 #endif // !OS_WINDOW_H

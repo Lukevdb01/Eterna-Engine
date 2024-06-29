@@ -2,29 +2,23 @@
 
 #include "engine.h"
 #include "OS/events.h"
+#include "OS/window.h"
 
 int main(int argc, char* argv[])
 {
+	Window window(L"Editor", 800, 600, Window::WindowType::Windowed);
 	Events events;
 
-	std::cout << "Hello, World!" << std::endl;
-
-	bool running = true;
-	while (running)
+	while (window.IsRunning())
 	{
 		events.Update();
 
 		if (events.Pressed(event::Type::KEY_ESCAPE))
 		{
-			running = false;
+			window.Destroy();
 		}
 
-		if (events.Pressed(event::Type::KEY_SPACE))
-		{
-			Test();
-		}
+		window.Update();
 	}
-
-	std::cout << "Goodbye, World!" << std::endl;
 	return 0;
 }
