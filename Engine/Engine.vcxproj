@@ -155,11 +155,15 @@
     <ClInclude Include="include\OS\events.h" />
     <ClInclude Include="include\OS\event_types.h" />
     <ClInclude Include="include\OS\window.h" />
+    <ClInclude Include="include\Utils\config.h" />
+    <ClInclude Include="include\OS\helper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\engine.cpp" />
+    <ClCompile Include="source\OS\windows\helper.cpp" />
     <ClCompile Include="source\OS\windows\win32_events.cpp" />
     <ClCompile Include="source\OS\windows\win32_window.cpp" />
+    <ClCompile Include="source\Utils\config.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
